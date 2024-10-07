@@ -19,6 +19,7 @@ void Snake::init() {
 
 void Snake::draw(SDL_Renderer* gRenderer) {
 	SDL_Rect fillRect;
+	//loop through body vector and draw squares at element position
 	for (int i = 0; i < this->length(); i++) {
 		fillRect = {this->body_[i].x, this->body_[i].y, this->size_, this->size_ };
 		SDL_SetRenderDrawColor(gRenderer, 0x00, 0xFF, 0x00, 0x00);
@@ -27,7 +28,7 @@ void Snake::draw(SDL_Renderer* gRenderer) {
 }
 
 void Snake::move(int direction) {
-	//update position so constantly moving based on direction
+	//update dx/dy so constantly moving based on direction
 	switch (direction) {
 		case 0:
 			if (this->body_[0].y > 0) {
@@ -58,6 +59,7 @@ void Snake::move(int direction) {
 			break;
 	}
 
+	//update positions of body vector to position of previous element
 	if (this->length() > 1) {
 		for (int i = this->length()-1; i > 0; i--) {
 			this->body_[i].x = this->body_[i-1].x;
@@ -65,6 +67,7 @@ void Snake::move(int direction) {
 		}
 	}
 	
+	//update position of head
 	this->body_[0].x += this->dx_;
 	this->body_[0].y += this->dy_;
 }
@@ -74,6 +77,17 @@ void Snake::grow() {
 	p.x = this->body_[length()-1].x += this->dx_;
 	p.y = this->body_[length()-1].y += this->dy_;	
 	this->body_.push_back(p);
+}
+
+bool Snake::colliding_wall() {
+	if (this->body_[0].x < 0 || this->body_[0].x >= 750) {
+		return true;
+	}
+	else if (this->body_[0].y < 0 || this->body_[0].y >= 750) {
+		return true;
+	}
+	
+	return false;
 }
 
 bool Snake::colliding_self() {

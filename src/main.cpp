@@ -5,7 +5,7 @@
 
 const int SCREEN_WIDTH = 750;
 const int SCREEN_HEIGHT = 750;
-const int SCREEN_FPS = 10;
+const int SCREEN_FPS = 7;
 const int SCREEN_TICKS_PER_FRAME = 1000 / SCREEN_FPS;
 
 SDL_Window* gWindow = NULL;
@@ -58,11 +58,15 @@ void doCollisions(Snake & s, Apple & a) {
 	if (s.x() == a.x() && s.y() == a.y()) {
 		a.move();
 		s.grow();
-	}
+	}	
 	else if (s.length() > 1) {
 		if (s.colliding_self()) {
 			s.reset();
 		}
+	}
+	
+	if (s.colliding_wall()) {
+		s.reset();
 	}
 }
 

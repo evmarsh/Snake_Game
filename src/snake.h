@@ -16,9 +16,12 @@ class Snake {
 		void draw(SDL_Renderer* gRenderer);
 		int x();
 		int y();
+		int x(int index);
+		int y(int index);
 		int length();
 		void move(int direction);
 		void grow();
+		bool colliding_wall();
 		bool colliding_self();
 		void reset();
 	

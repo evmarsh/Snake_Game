@@ -21,13 +21,15 @@ void Apple::move() {
 	bool notDone = true;
 
 	while(notDone) {
-		//generate a rand num between 1 and 15 then multiply by 50 so apple is in line with snake
-		randX = (1 + std::rand() / ((RAND_MAX + 1u) / 15)) * 50;
-		randY = (1 + std::rand() / ((RAND_MAX + 1u) / 15)) * 50;
+		//generate a rand num between 1 and 14 then multiply by 50 so apple is in line with snake
+		randX = (1 + std::rand() / ((RAND_MAX + 1u) / 14)) * 50;
+		randY = (1 + std::rand() / ((RAND_MAX + 1u) / 14)) * 50;
 
 		//make sure apple isn't on snake
-		if (randX != s_.x() && randY != s_.y()) {
-			notDone = false;
+		for (int i = 0; i < s_.length(); i++) {
+			if (randX != s_.x(i) && randY != s_.y(i)) {
+				notDone = false;
+			}
 		}
 	}
 
