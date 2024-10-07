@@ -2,12 +2,7 @@
 #define SNAKE_H
 #include <SDL2/SDL.h>
 #include <vector>
-//#include "vector2.h"
-
-struct Vector2 {
-	int x;
-	int y;
-};
+#include "vector2.h"
 
 class Snake {
 	public:
